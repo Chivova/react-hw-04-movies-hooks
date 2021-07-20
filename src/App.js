@@ -1,21 +1,26 @@
+import { Switch, Route } from 'react-router-dom';
+
+import Container from './components/Container';
+import Navigation from './components/Navigation';
+import HomePage from './views/HomePage/HomePage';
+import MoviesPage from './views/MoviesPage';
+
 import './App.css';
 
-// import moviesApi from './api/movies-api';
-// import { useState, useEffect } from 'react';
-import Navigation from './components/Navigation';
-
 function App() {
-  // const [movies, setMovies] = useState(null);
-
-  // useEffect(() => {
-  //   moviesApi.fetchTrendingMovies().then(setMovies);
-  // }, []);
-  // console.log(movies);
-
   return (
-    <>
+    <Container>
       <Navigation />
-    </>
+
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/movies">
+          <MoviesPage />
+        </Route>
+      </Switch>
+    </Container>
   );
 }
 
