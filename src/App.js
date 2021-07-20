@@ -1,6 +1,8 @@
 import './App.css';
-import moviesApi from './api/movies-api';
-import { useState, useEffect } from 'react';
+
+// import moviesApi from './api/movies-api';
+// import { useState, useEffect } from 'react';
+import Navigation from './components/Navigation';
 
 function App() {
   // const [movies, setMovies] = useState(null);
@@ -10,7 +12,11 @@ function App() {
   // }, []);
   // console.log(movies);
 
-  return <></>;
+  return (
+    <>
+      <Navigation />
+    </>
+  );
 }
 
 export default App;
