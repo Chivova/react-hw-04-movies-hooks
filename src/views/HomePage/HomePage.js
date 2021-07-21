@@ -10,8 +10,6 @@ export default function HomePage() {
     moviesApi.fetchTrendingMovies().then(setMovies);
   }, []);
 
-  console.log(movies);
-
   return (
     <div>
       <PageHeading text="Tranding Today" />
