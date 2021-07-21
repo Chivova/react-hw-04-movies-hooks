@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+
+import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
 
 import PageHeading from '../../components/PageHeading';
+import MovieCard from '../../components/MovieCard';
 import moviesApi from '../../api/movies-api';
+import Cast from '../Cast/Cast';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState([]);
+  const { url } = useRouteMatch();
+  console.log(url);
+  const [movieDetails, setMovieDetails] = useState([null]);
 
   useEffect(() => {
     moviesApi.fetchMovieDetailsById(movieId).then(setMovieDetails);
   }, [movieId]);
 
-  console.log(movieDetails);
   return (
-  <>
-          <PageHeading text={`Фильм ${movieId}`} />
+    <>
+      <PageHeading text={`Фильм ${movieDetails.title}`} />
+      <MovieCard movie={movieDetails} />
 
-      {movieDetails &&(<div> <img src={backdrop_path}></div>)}
+      <Route to={`${url}/cast`}>
+        <Cast movieId={movieId} />
+      </Route>
     </>
   );
 }
