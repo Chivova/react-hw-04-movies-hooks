@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
 import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
 
@@ -9,8 +9,7 @@ import Cast from '../Cast/Cast';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  const { url } = useRouteMatch();
-  console.log(url);
+  const { url, path } = useRouteMatch();
   const [movieDetails, setMovieDetails] = useState([null]);
 
   useEffect(() => {
@@ -18,13 +17,14 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   return (
-    <>
+    <Fragment>
       <PageHeading text={`Фильм ${movieDetails.title}`} />
       <MovieCard movie={movieDetails} />
 
-      <Route to={`${url}/cast`}>
+      <NavLink to={`${url}/cast`}>Cast</NavLink>
+      <Route path={`${path}/cast`}>
         <Cast movieId={movieId} />
       </Route>
-    </>
+    </Fragment>
   );
 }
