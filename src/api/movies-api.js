@@ -16,8 +16,8 @@ function fetchTrendingMovies() {
 
 function fetchMoviesSearchByName(query) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&${query}&language=en-US`,
-  );
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=en-US`,
+  ).then(data => data.results);
 }
 
 function fetchMovieDetailsById(movieId) {
