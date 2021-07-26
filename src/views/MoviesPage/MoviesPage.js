@@ -1,3 +1,6 @@
-export default function MoviesPage() {
-  return <h1>Hello from MoviesPage</h1>;
+import { useState, useEffect } from 'react';
+import SearchForm from '../../components/SearchForm';
+export default function MoviesPage({ movieQuery }) {
+  const [query, setQuery] = useState('');
+  return <SearchForm></SearchForm>;
 }
