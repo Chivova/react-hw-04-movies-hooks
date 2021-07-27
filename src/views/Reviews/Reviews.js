@@ -3,6 +3,7 @@ import moviesApi from '../../api/movies-api';
 
 export default function Reviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
+
   useEffect(() => {
     moviesApi.fetchMovieReviews(movieId).then(({ results }) => {
       if (results === 0) {

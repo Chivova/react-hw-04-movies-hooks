@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
 import moviesApi from '../../api/movies-api';
+import MovieList from '../../components/MovieList/MovieList';
 import PageHeading from '../../components/PageHeading';
 
 export default function HomePage() {
@@ -13,14 +14,7 @@ export default function HomePage() {
   return (
     <div>
       <PageHeading text="Tranding Today" />
-      {movies &&
-        movies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`movies/${movie.id}`}>
-              {movie.original_title || movie.name}
-            </Link>
-          </li>
-        ))}
+      {movies && <MovieList movies={movies} />}
     </div>
   );
 }

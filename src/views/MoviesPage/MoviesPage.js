@@ -1,8 +1,8 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
 import 'react-toastify/dist/ReactToastify.css';
 import moviesApi from '../../api/movies-api';
+import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm';
 
 export default function MoviesPage() {
@@ -30,15 +30,7 @@ export default function MoviesPage() {
   return (
     <Fragment>
       <SearchForm onSubmit={handleFormSubmit}></SearchForm>
-      {moviesByName.length > 1
-        ? moviesByName.map(movieByName => (
-            <li key={movieByName.id}>
-              <Link to={`movies/${movieByName.id}`}>
-                {movieByName.original_title || movieByName.name}
-              </Link>
-            </li>
-          ))
-        : error}
+      {moviesByName.length > 1 ? <MovieList movies={moviesByName} /> : error}
     </Fragment>
   );
 }
