@@ -11,11 +11,11 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 500;
-  color: #18cbd1;
+  color: rgb(139, 0, 0);
   font-size: 18px;
 }
 
 .activeLink {
   composes: link;
-  color: #f14029;
+  color: #201f1f;
 }

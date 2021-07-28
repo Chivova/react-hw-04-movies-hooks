@@ -1,8 +1,9 @@
 .link {
   text-decoration: none;
-  color: #12989d;
+  color: #dddddd;
+  font-size: 18px;
 }
 
 .link:hover {
-  color: darkred;
+  color: rgb(139, 0, 0);
 }

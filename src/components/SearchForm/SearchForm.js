@@ -12,6 +12,7 @@ export default function SearchForm({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
     if (movieQuery.trim() === '') {
+      alert('Miss query, try again!!');
       return;
     }
     onSubmit(movieQuery);

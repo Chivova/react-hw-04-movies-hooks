@@ -1,0 +1,12 @@
+.reviewsList {
+  list-style: none;
+  text-align: center;
+}
+
+.errorTitle {
+  color: rgb(243, 6, 6);
+}
+
+.authorTitle {
+  font-size: 20px;
+}

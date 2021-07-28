@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import moviesApi from '../../api/movies-api';
 
+import s from './Reviews.module.css';
+
 export default function Reviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
 
@@ -14,13 +16,15 @@ export default function Reviews({ movieId }) {
   }, [movieId]);
 
   return (
-    <ul>
+    <ul className={s.reviewsList}>
       {!reviews.length ? (
-        <h3>Sorry, we don't have reviews for this movie</h3>
+        <h3 className={s.errorTitle}>
+          Sorry, we don't have reviews for this movie
+        </h3>
       ) : (
         reviews.map(({ id, author, content }) => (
           <li key={id}>
-            <h4>{author}</h4>
+            <h4 className={s.authorTitle}>{author}</h4>
             <p>{content}</p>
           </li>
         ))

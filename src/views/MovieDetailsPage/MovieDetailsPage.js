@@ -8,6 +8,8 @@ import moviesApi from '../../api/movies-api';
 import Cast from '../Cast/Cast';
 import Reviews from '../Reviews';
 
+import s from './MovieDetailsPage.module.css';
+
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
@@ -22,11 +24,15 @@ export default function MovieDetailsPage() {
       <PageHeading text={`Фильм ${movieDetails.title}`} />
       <MovieCard movie={movieDetails} />
 
-      <NavLink to={`${url}/cast`}>Cast</NavLink>
+      <NavLink className={s.navLink} to={`${url}/cast`}>
+        Cast
+      </NavLink>
       <Route path={`${path}/cast`}>
         <Cast movieId={movieId} />
       </Route>
-      <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+      <NavLink className={s.navLink} to={`${url}/reviews`}>
+        Reviews
+      </NavLink>
       <Route path={`${path}/reviews`}>
         <Reviews movieId={movieId} />
       </Route>

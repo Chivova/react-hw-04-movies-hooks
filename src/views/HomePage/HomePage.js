@@ -13,6 +13,7 @@ export default function HomePage() {
 
   useEffect(() => {
     setLoading(true);
+
     moviesApi.fetchTrendingMovies().then(setMovies).finally(setLoading(false));
   }, []);
 

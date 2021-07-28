@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
-// import { useParams } from 'react-router-dom';
 import moviesApi from '../../api/movies-api';
+
+import s from './Cast.module.css';
 
 export default function Cast({ movieId }) {
   const [actors, setActors] = useState([]);
@@ -15,13 +16,13 @@ export default function Cast({ movieId }) {
   return (
     <Fragment>
       {actors && (
-        <ul>
+        <ul className={s.castList}>
           {actors.map(({ cast_id, name, profile_path }) => (
             <li key={cast_id}>
               <h4>{name}</h4>
               <img
-                width={'180px'}
-                height={'200px'}
+                width={'200px'}
+                height={'250px'}
                 src={
                   profile_path
                     ? `${AUTHOR_IMG_URL}/${profile_path}`
