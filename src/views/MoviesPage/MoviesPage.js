@@ -1,6 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
 
-import 'react-toastify/dist/ReactToastify.css';
 import moviesApi from '../../api/movies-api';
 import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm';
@@ -12,7 +11,6 @@ export default function MoviesPage() {
 
   const handleFormSubmit = query => {
     setMovieQuery(query);
-    console.log(movieQuery);
   };
 
   useEffect(() => {

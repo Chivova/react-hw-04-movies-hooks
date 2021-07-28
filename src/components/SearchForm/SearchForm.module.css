@@ -1,0 +1,15 @@
+.input {
+  width: 200px;
+  padding: 10px;
+  margin-right: 30px;
+}
+
+.btn {
+  padding: 10px;
+  border-radius: 5px;
+  color: dimgray;
+}
+
+.btn:hover {
+  background-color: rgb(32, 211, 211);
+}

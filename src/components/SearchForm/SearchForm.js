@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import s from './SearchForm.module.css';
 
 export default function SearchForm({ onSubmit }) {
   const [movieQuery, setMovieQuery] = useState('');
@@ -20,6 +21,7 @@ export default function SearchForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={s.input}
         onChange={handleMovieQueryChange}
         value={movieQuery}
         type="text"
@@ -27,7 +29,7 @@ export default function SearchForm({ onSubmit }) {
         autoFocus
         placeholder="Search your movie"
       />
-      <button type="submit">
+      <button className={s.btn} type="submit">
         <span>Search</span>
       </button>
     </form>
