@@ -1,20 +1,29 @@
 import { useState, useEffect, Fragment } from 'react';
+import Loader from 'react-loader-spinner';
 import moviesApi from '../../api/movies-api';
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import s from './Cast.module.css';
 
 export default function Cast({ movieId }) {
   const [actors, setActors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const AUTHOR_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
+    setLoading(true);
     moviesApi
       .fetchMovieActorsCredit(movieId)
-      .then(({ cast }) => setActors(cast));
+      .then(({ cast }) => setActors(cast))
+      .finally(setLoading(false));
   }, [movieId]);
 
   return (
     <Fragment>
+      {loading && (
+        <Loader type="Watch" color="#00BFFF" height={50} width={50} />
+      )}
       {actors && (
         <ul className={s.castList}>
           {actors.map(({ cast_id, name, profile_path }) => (
