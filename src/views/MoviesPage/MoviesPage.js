@@ -6,8 +6,11 @@ import MovieList from '../../components/MovieList/MovieList';
 import SearchForm from '../../components/SearchForm';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function MoviesPage() {
+  const history = useHistory();
+  const location = useLocation();
   const [movieQuery, setMovieQuery] = useState('');
   const [moviesByName, setMoviesByName] = useState([]);
   const [error, setError] = useState('');
@@ -15,6 +18,10 @@ export default function MoviesPage() {
 
   const handleFormSubmit = query => {
     setMovieQuery(query);
+    history.push({
+      ...location,
+      search: `query=${query}`,
+    });
   };
 
   useEffect(() => {
