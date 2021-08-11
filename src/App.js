@@ -28,7 +28,7 @@ function App() {
       <Navigation />
       <Suspense
         fallback={
-          <Loader type="Watch" color="#00BFFF" height={50} width={50} />
+          <Loader type="Watch" color="#00BFFF" height={100} width={100} />
         }
       >
         <Switch>
