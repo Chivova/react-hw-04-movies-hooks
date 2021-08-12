@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment, lazy, Suspense } from 'react';
-import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
+import { NavLink, Route, useParams, useRouteMatch} from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 
 import PageHeading from '../../components/PageHeading';
