@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
 
 import Container from './components/Container';
 import Navigation from './components/Navigation';
@@ -25,12 +24,9 @@ const MoviesPage = lazy(() =>
 function App() {
   return (
     <Container>
-      <Navigation />
-      <Suspense
-        fallback={
-          <Loader type="Watch" color="#00BFFF" height={100} width={100} />
-        }
-      >
+      <Suspense fallback={<h1>Loading.......</h1>}>
+        <Navigation />
+
         <Switch>
           <Route exact path="/">
             <HomePage />
@@ -43,7 +39,6 @@ function App() {
           <Route path="/movies/:movieId">
             <MovieDetailsPage />
           </Route>
-
           <Route>
             <HomePage />
           </Route>
