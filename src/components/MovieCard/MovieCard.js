@@ -14,7 +14,6 @@ export default function MovieCard({ movie }) {
       <button type="button" onClick={() => history.push('./')}>
         Go back
       </button>
-
       <div>
         <img
           src={
