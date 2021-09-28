@@ -37,8 +37,9 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const handleGoBack = () => {
-    history.push({ pathname: state.backUrl });
+    history.push({ pathname: state?.backUrl || '/' });
   };
+
   return (
     <Fragment>
       {/* {loading && (

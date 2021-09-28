@@ -10,11 +10,12 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 export default function MoviesPage() {
   const history = useHistory();
-  const location = useLocation();
+  const { location, search } = useLocation();
   const [movieQuery, setMovieQuery] = useState('');
   const [moviesByName, setMoviesByName] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const searchParam = new URLSearchParams(search).get('query');
 
   const handleFormSubmit = query => {
     setMovieQuery(query);
@@ -39,7 +40,10 @@ export default function MoviesPage() {
         setMoviesByName(response);
       })
       .finally(setLoading(false));
-  }, [movieQuery]);
+
+    history.push({ search: `query=${searchParam}` });
+    console.log(search);
+  }, [movieQuery, searchParam]);
 
   return (
     <Fragment>
