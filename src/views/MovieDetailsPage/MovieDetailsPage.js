@@ -1,5 +1,12 @@
 import { useState, useEffect, Fragment, lazy, Suspense } from 'react';
-import { NavLink, Route, useParams, useRouteMatch } from 'react-router-dom';
+import {
+  NavLink,
+  Route,
+  useParams,
+  useRouteMatch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 // import Loader from 'react-loader-spinner';
 
 import PageHeading from '../../components/PageHeading';
@@ -17,8 +24,10 @@ const Reviews = lazy(() =>
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
-  const [movieDetails, setMovieDetails] = useState([null]);
+  const [movieDetails, setMovieDetails] = useState([]);
   // const [loading, setLoading] = useState(false);
+  const { state } = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     // setLoading(true);
@@ -27,11 +36,17 @@ export default function MovieDetailsPage() {
     // .finally(setLoading(false));
   }, [movieId]);
 
+  const handleGoBack = () => {
+    history.push({ pathname: state.backUrl });
+  };
   return (
     <Fragment>
       {/* {loading && (
         <Loader type="Watch" color="#00BFFF" height={50} width={50} />
       )} */}
+      <button type="button" onClick={handleGoBack}>
+        Go back
+      </button>
       {movieDetails.title && (
         <PageHeading text={`Фильм ${movieDetails.title}`} />
       )}
