@@ -18,7 +18,7 @@ export default function MoviesPage() {
   const [loading, setLoading] = useState(false);
   const searchParam = new URLSearchParams(location.search).get('query');
   console.log(location);
-
+  console.log(searchParam);
   const handleFormSubmit = query => {
     setMovieQuery(query);
     history.push({
@@ -28,16 +28,16 @@ export default function MoviesPage() {
   };
 
   useEffect(() => {
-    if (movieQuery === '') {
+    if (searchParam === '') {
       return;
     }
     setLoading(true);
 
     moviesApi
-      .fetchMoviesSearchByName(movieQuery)
+      .fetchMoviesSearchByName(searchParam)
       .then(response => {
         if (response.length === 0) {
-          setError(<h2>No movies on your query ${movieQuery}</h2>);
+          setError(<h2>No movies on your query ${searchParam}</h2>);
         }
         setMoviesByName(response);
       })
