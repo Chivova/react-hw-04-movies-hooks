@@ -28,16 +28,21 @@ export default function MovieDetailsPage() {
   // const [loading, setLoading] = useState(false);
   const { state } = useLocation();
   const history = useHistory();
-
+  console.log(state.search);
   useEffect(() => {
     // setLoading(true);
-
     moviesApi.fetchMovieDetailsById(movieId).then(setMovieDetails);
     // .finally(setLoading(false));
   }, [movieId]);
 
   const handleGoBack = () => {
     history.push({ pathname: state?.backUrl || '/' });
+
+    // if (state?.search) {
+    //   history.push({
+    //     search: state.search,
+    //   });
+    // }
   };
 
   return (
