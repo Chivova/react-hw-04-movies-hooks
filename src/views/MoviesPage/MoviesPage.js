@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import Loader from 'react-loader-spinner';
 
 import moviesApi from '../../api/movies-api';
-import MovieList from '../../components/MovieList/MovieList';
+import SearchMovieList from '../../components/SearchMovieList/SearchMovieList';
 import SearchForm from '../../components/SearchForm';
 
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -11,14 +11,13 @@ import { useHistory, useLocation } from 'react-router-dom';
 export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
-  // const { search } = useLocation();
+  const { search } = useLocation();
   const [movieQuery, setMovieQuery] = useState('');
   const [moviesByName, setMoviesByName] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const searchParam = new URLSearchParams(location.search).get('query');
-  console.log(location);
-  console.log(searchParam);
+
   const handleFormSubmit = query => {
     setMovieQuery(query);
     history.push({
@@ -28,9 +27,10 @@ export default function MoviesPage() {
   };
 
   useEffect(() => {
-    if (searchParam === '') {
+    if (searchParam === '' || !searchParam) {
       return;
     }
+
     setLoading(true);
 
     moviesApi
@@ -52,7 +52,11 @@ export default function MoviesPage() {
       {loading && (
         <Loader type="Watch" color="#00BFFF" height={50} width={50} />
       )}
-      {moviesByName.length > 1 ? <MovieList movies={moviesByName} /> : error}
+      {moviesByName.length > 1 ? (
+        <SearchMovieList movies={moviesByName} />
+      ) : (
+        error
+      )}
     </Fragment>
   );
 }
