@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import s from './SearchMovieList.module.css';
 
-export default function SearchMovieList({ movies }) {
+export default function SearchMovieList({ movies, searchValue }) {
   const { pathname } = useLocation();
 
   return (
@@ -14,6 +14,7 @@ export default function SearchMovieList({ movies }) {
               pathname: `${pathname}/${movie.id}`,
               state: {
                 backUrl: pathname,
+                from: searchValue,
               },
             }}
           >

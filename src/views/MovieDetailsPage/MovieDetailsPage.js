@@ -26,9 +26,10 @@ export default function MovieDetailsPage() {
   const { url, path } = useRouteMatch();
   const [movieDetails, setMovieDetails] = useState([]);
   // const [loading, setLoading] = useState(false);
-  const { state } = useLocation();
+  const { state, search } = useLocation();
+  // const location = useLocation();
   const history = useHistory();
-  console.log(state);
+
   useEffect(() => {
     // setLoading(true);
     moviesApi.fetchMovieDetailsById(movieId).then(setMovieDetails);
@@ -36,7 +37,10 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const handleGoBack = () => {
-    history.push({ pathname: state?.backUrl || '/' });
+    history.push({
+      pathname: state?.backUrl || '/',
+      search: state.from,
+    });
   };
 
   return (

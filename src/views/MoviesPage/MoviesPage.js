@@ -16,8 +16,8 @@ export default function MoviesPage() {
   const [moviesByName, setMoviesByName] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const searchParam = new URLSearchParams(location.search).get('query');
-
+  const searchParam = new URLSearchParams(search).get('query');
+  console.log(searchParam);
   const handleFormSubmit = query => {
     setMovieQuery(query);
     history.push({
@@ -25,9 +25,9 @@ export default function MoviesPage() {
       search: `query=${query}`,
     });
   };
-
+  console.log(`MoviesPage ${search}`);
   useEffect(() => {
-    if (searchParam === '' || !searchParam) {
+    if (search === '') {
       return;
     }
 
@@ -43,9 +43,10 @@ export default function MoviesPage() {
       })
       .finally(setLoading(false));
 
-    history.push({ search: `query=${searchParam}` });
-  }, [history, movieQuery, searchParam]);
-
+    history.push({
+      search: `query=${searchParam}`,
+    });
+  }, [history, movieQuery, search, searchParam]);
   return (
     <Fragment>
       <SearchForm onSubmit={handleFormSubmit}></SearchForm>
@@ -53,7 +54,7 @@ export default function MoviesPage() {
         <Loader type="Watch" color="#00BFFF" height={50} width={50} />
       )}
       {moviesByName.length > 1 ? (
-        <SearchMovieList movies={moviesByName} />
+        <SearchMovieList movies={moviesByName} searchValue={searchParam} />
       ) : (
         error
       )}
