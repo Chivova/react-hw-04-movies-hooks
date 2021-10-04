@@ -26,7 +26,7 @@ export default function MovieDetailsPage() {
   const { url, path } = useRouteMatch();
   const [movieDetails, setMovieDetails] = useState([]);
   // const [loading, setLoading] = useState(false);
-  const { state, search } = useLocation();
+  const { state } = useLocation();
   // const location = useLocation();
   const history = useHistory();
 
@@ -39,8 +39,13 @@ export default function MovieDetailsPage() {
   const handleGoBack = () => {
     history.push({
       pathname: state?.backUrl || '/',
-      search: state.from,
     });
+
+    if (state?.from) {
+      history.push({
+        search: state.from,
+      });
+    }
   };
 
   return (
