@@ -35,7 +35,7 @@ export default function Cast({ movieId }) {
                 src={
                   profile_path
                     ? `${AUTHOR_IMG_URL}/${profile_path}`
-                    : 'Image not found'
+                    : 'https://dummyimage.com/200x300/b3b3b3/fff.jpg&text=No+image'
                 }
                 alt={name}
               />

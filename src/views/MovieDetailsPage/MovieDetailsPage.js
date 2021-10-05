@@ -2,7 +2,6 @@ import { useState, useEffect, Fragment, lazy, Suspense } from 'react';
 import {
   NavLink,
   Route,
-  Switch,
   useParams,
   useRouteMatch,
   useHistory,
@@ -70,17 +69,21 @@ export default function MovieDetailsPage() {
       </NavLink>
       <Suspense
         fallback={
-          <Loader type="Watch" color="#00BFFF" height={50} width={50} />
+          <Loader
+            className={s.spinner}
+            type="Oval"
+            color="rgb(139, 0, 0)"
+            height={80}
+            width={80}
+          />
         }
       >
-        <Switch>
-          <Route path={`${path}/cast`}>
-            <Cast movieId={movieId} />
-          </Route>
-          <Route path={`${path}/reviews`}>
-            <Reviews movieId={movieId} />
-          </Route>
-        </Switch>
+        <Route path={`${path}/cast`}>
+          <Cast movieId={movieId} />
+        </Route>
+        <Route path={`${path}/reviews`}>
+          <Reviews movieId={movieId} />
+        </Route>
       </Suspense>
     </Fragment>
   );

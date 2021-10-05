@@ -28,7 +28,13 @@ function App() {
     <Container>
       <Suspense
         fallback={
-          <Loader type="Oval" color="rgb(139, 0, 0)" height={100} width={100} />
+          <Loader
+            className="Spinner"
+            type="Oval"
+            color="rgb(139, 0, 0)"
+            height={100}
+            width={100}
+          />
         }
       >
         <Navigation />
