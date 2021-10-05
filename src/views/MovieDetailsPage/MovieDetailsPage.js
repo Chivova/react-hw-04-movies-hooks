@@ -2,18 +2,19 @@ import { useState, useEffect, Fragment, lazy, Suspense } from 'react';
 import {
   NavLink,
   Route,
+  Switch,
   useParams,
   useRouteMatch,
   useHistory,
   useLocation,
 } from 'react-router-dom';
-// import Loader from 'react-loader-spinner';
+import Loader from 'react-loader-spinner';
 
 import PageHeading from '../../components/PageHeading';
 import MovieCard from '../../components/MovieCard';
 import moviesApi from '../../api/movies-api';
 
-// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import s from './MovieDetailsPage.module.css';
 
 const Cast = lazy(() => import('../Cast' /* webpackChunkName: "cast-page" */));
@@ -24,16 +25,12 @@ const Reviews = lazy(() =>
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const { url, path } = useRouteMatch();
-  const [movieDetails, setMovieDetails] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [movieDetails, setMovieDetails] = useState([null]);
   const { state } = useLocation();
-  // const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    // setLoading(true);
     moviesApi.fetchMovieDetailsById(movieId).then(setMovieDetails);
-    // .finally(setLoading(false));
   }, [movieId]);
 
   const handleGoBack = () => {
@@ -50,32 +47,40 @@ export default function MovieDetailsPage() {
 
   return (
     <Fragment>
-      {/* {loading && (
-        <Loader type="Watch" color="#00BFFF" height={50} width={50} />
-      )} */}
       <button type="button" onClick={handleGoBack}>
         Go back
       </button>
       {movieDetails.title && (
         <PageHeading text={`Фильм ${movieDetails.title}`} />
       )}
+      {movieDetails.id && <MovieCard movie={movieDetails} />}
 
-      <MovieCard movie={movieDetails} />
-
-      <NavLink className={s.navLink} to={`${url}/cast`}>
+      <NavLink
+        className={s.navLink}
+        to={{ pathname: `${url}/cast`, state: { ...state } }}
+      >
         Cast
       </NavLink>
 
-      <NavLink className={s.navLink} to={`${url}/reviews`}>
+      <NavLink
+        className={s.navLink}
+        to={{ pathname: `${url}/reviews`, state: { ...state } }}
+      >
         Reviews
       </NavLink>
-      <Suspense fallback={<h1>Loading</h1>}>
-        <Route path={`${path}/cast`}>
-          <Cast movieId={movieId} />
-        </Route>
-        <Route path={`${path}/reviews`}>
-          <Reviews movieId={movieId} />
-        </Route>
+      <Suspense
+        fallback={
+          <Loader type="Watch" color="#00BFFF" height={50} width={50} />
+        }
+      >
+        <Switch>
+          <Route path={`${path}/cast`}>
+            <Cast movieId={movieId} />
+          </Route>
+          <Route path={`${path}/reviews`}>
+            <Reviews movieId={movieId} />
+          </Route>
+        </Switch>
       </Suspense>
     </Fragment>
   );

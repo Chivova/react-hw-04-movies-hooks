@@ -3,7 +3,7 @@ import s from './SearchMovieList.module.css';
 
 export default function SearchMovieList({ movies, searchValue }) {
   const { pathname } = useLocation();
-  console.log(searchValue);
+
   return (
     <ol>
       {movies.map(movie => (

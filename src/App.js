@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import Container from './components/Container';
 import Navigation from './components/Navigation';
@@ -8,6 +9,7 @@ import Navigation from './components/Navigation';
 // import MoviesPage from './views/MoviesPage';
 
 import './App.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const HomePage = lazy(() =>
   import('./views/HomePage' /* webpackChunkName: "homepage" */),
@@ -24,7 +26,11 @@ const MoviesPage = lazy(() =>
 function App() {
   return (
     <Container>
-      <Suspense fallback={<h1>Loading.......</h1>}>
+      <Suspense
+        fallback={
+          <Loader type="Oval" color="rgb(139, 0, 0)" height={100} width={100} />
+        }
+      >
         <Navigation />
 
         <Switch>

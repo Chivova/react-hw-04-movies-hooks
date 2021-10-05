@@ -1,13 +1,10 @@
 import { Fragment } from 'react';
-// import { useHistory, useLocation } from 'react-router-dom';
 
 import s from './MovieCard.module.css';
 
 export default function MovieCard({ movie }) {
   const { backdrop_path, title, overview, genres, vote_average } = movie;
   const POSTER_URL = 'https://image.tmdb.org/t/p/w500';
-
-  // const location = useLocation();
 
   return (
     <Fragment>
